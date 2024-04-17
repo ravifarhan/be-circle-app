@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
+import { authMiddlewareData } from "../type/app";
 
 export const auth = (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -21,7 +22,7 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
       });
     }
 
-    console.log(decoded);
+    res.locals.user = (decoded as authMiddlewareData).id;
 
     next();
   } catch (err) {

@@ -40,11 +40,20 @@ export const register = async (payloaod: IRegister) => {
 
   const hashPassword = await bcrypt.hash(value.password, 10);
   value.password = hashPassword;
-  return await db.user.create({
+
+  const user = await db.user.create({
     data: {
       ...value,
     },
   });
+
+  const profile = await db.profile.create({
+    data: {
+      userId: user.id,
+    },
+  })
+
+  return { user, profile };
 };
 
 export const login = async (

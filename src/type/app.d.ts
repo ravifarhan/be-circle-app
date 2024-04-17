@@ -4,3 +4,7 @@ export interface IRegister {
   username: string;
   password: string;
 }
+
+export interface authMiddlewareData {
+  id: string;
+}

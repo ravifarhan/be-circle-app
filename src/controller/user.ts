@@ -9,7 +9,6 @@ export const register = async (req: Request, res: Response) => {
     res.json({
       status: true,
       message: "success",
-      data: result,
     });
   } catch (err) {
     res.status(500).json({
