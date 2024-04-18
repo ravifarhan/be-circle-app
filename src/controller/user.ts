@@ -4,7 +4,7 @@ import * as userService from "../services/user";
 export const register = async (req: Request, res: Response) => {
   try {
     const { body } = req;
-    const result = await userService.register(body);
+    await userService.register(body);
 
     res.json({
       status: true,

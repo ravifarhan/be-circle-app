@@ -16,8 +16,8 @@ export const findUser = async (id: number) => {
   });
 };
 
-export const register = async (payloaod: IRegister) => {
-  const { error, value } = registerValidataion.validate(payloaod);
+export const register = async (payload: IRegister) => {
+  const { error, value } = registerValidataion.validate(payload);
   if (error) {
     throw new Error(error.details[0].message);
   }

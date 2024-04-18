@@ -5,6 +5,13 @@ export interface IRegister {
   password: string;
 }
 
-export interface authMiddlewareData {
+export type authMiddlewareData = {
   id: string;
+}
+
+export interface IProfile{
+  bio?: string;
+  avatar?: string;
+  cover?: string;
+  userId?: number;
 }

@@ -24,7 +24,7 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
 
     res.locals.user = (decoded as authMiddlewareData).id;
 
-    next();
+    return next();
   } catch (err) {
     return res.status(500).json({
       status: false,
