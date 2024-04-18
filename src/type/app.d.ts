@@ -7,11 +7,17 @@ export interface IRegister {
 
 export type authMiddlewareData = {
   id: string;
-}
+};
 
-export interface IProfile{
+export interface IProfile {
   bio?: string;
   avatar?: string;
   cover?: string;
   userId?: number;
+}
+
+export interface IThread {
+  id?: number;
+  content?: string;
+  userId: number;
 }
