@@ -6,15 +6,33 @@ export const getThreads = async () => {
     where: {
       threadId: null,
     },
+    orderBy: {
+      id: "desc",
+    },
     include: {
       images: {
         select: {
           image: true,
         },
       },
+      author: {
+        select: {
+          id: true,
+          username: true,
+          fullname: true,
+          password: false,
+          profile: {
+            select: {
+              avatar: true,
+            },
+          },
+        },
+      },
+      like: true,
       _count: {
         select: {
           replies: true,
+          like: true,
         },
       },
     },
@@ -31,6 +49,24 @@ export const getThread = async (id: number) => {
       images: {
         select: {
           image: true,
+        },
+      },
+      author: {
+        select: {
+          id: true,
+          username: true,
+          fullname: true,
+          profile: {
+            select: {
+              avatar: true,
+            },
+          },
+        },
+      },
+      _count: {
+        select: {
+          replies: true,
+          like: true,
         },
       },
     },
@@ -108,6 +144,53 @@ export const getReplies = async (threadId: number) => {
           replies: true,
         },
       },
+      author: {
+        include: {
+          profile: {
+            select: {
+              avatar: true,
+            },
+          },
+        },
+      },
     },
   });
 };
+
+export const getThreadByUser = async (userId: number) => {
+  return await db.thread.findMany({
+    where: {
+      threadId: null,
+      userId,
+    },
+    orderBy: {
+      id: "desc",
+    },
+    include: {
+      images: {
+        select: {
+          image: true,
+        },
+      },
+      author: {
+        select: {
+          id: true,
+          username: true,
+          fullname: true,
+          password: false,
+          profile: {
+            select: {
+              avatar: true,
+            },
+          },
+        },
+      },
+      _count: {
+        select: {
+          replies: true,
+          like: true,
+        },
+      },
+    },
+  });
+}

@@ -11,8 +11,6 @@ export const getLikes = async (threadId: number) => {
           username: true,
           fullname: true,
           id: true,
-        },
-        include: {
           profile: {
             select: {
               avatar: true,
@@ -24,6 +22,16 @@ export const getLikes = async (threadId: number) => {
   });
 };
 
+
+export const getCurrentUserLike = async (threadId: number, userId: number) => {
+  return await db.like.findFirst({
+    where: {
+      threadId,
+      userId,
+    },
+  });
+};
+
 export const createLike = async (payload: {
   threadId: number;
   userId: number;
@@ -31,34 +39,34 @@ export const createLike = async (payload: {
   const existedThread = await db.thread.findFirst({
     where: {
       id: payload.threadId,
-    }
-  })
+    },
+  });
 
   if (!existedThread) {
     throw new Error("Thread not found");
   }
-   
+
   const existedLike = await db.like.findFirst({
     where: {
       threadId: payload.threadId,
-      userId: payload.userId
-    }
-  })
+      userId: payload.userId,
+    },
+  });
 
   if (existedLike) {
     await db.like.deleteMany({
       where: {
         threadId: payload.threadId,
-        userId: payload.userId
-      }
-    })
-    return "Unlike success"
+        userId: payload.userId,
+      },
+    });
+    return "Unlike success";
   }
 
   await db.like.create({
     data: {
-      ...payload
-    }
-  })
-  return "Like success"
+      ...payload,
+    },
+  });
+  return "Like success";
 };

@@ -5,7 +5,18 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export const getUsers = async () => {
-  return await db.user.findMany();
+  return await db.user.findMany({
+    include: {
+      profile: true,
+      _count: {
+        select: {
+          follower: true,
+          following: true,
+        }
+      }
+    }
+    
+  });
 };
 
 export const findUser = async (id: number) => {

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import * as userService from "../services/user";
+import { request } from "http";
 
 export const register = async (req: Request, res: Response) => {
   try {
@@ -36,6 +37,8 @@ export const login = async (req: Request, res: Response) => {
     });
   }
 };
+
+
 
 export const getUsers = async (req: Request, res: Response) => {
   try {
