@@ -1,16 +1,16 @@
 import db from "../db";
 import { IProfile, IUserProfile } from "../type/app";
 
-export const updateProfile = async (userId: number, payload: IProfile) => {
-  return await db.profile.update({
-    where: {
-      userId,
-    },
-    data: {
-      ...payload,
-    },
-  });
-};
+// export const updateProfile = async (userId: number, payload: IProfile) => {
+//   return await db.profile.update({
+//     where: {
+//       userId,
+//     },
+//     data: {
+//       ...payload,
+//     },
+//   });
+// };
 
 export const updateUserProfile = async (
   userId: number,
